@@ -1,32 +1,53 @@
 package com.github.alkhanm.movver.resources.controller;
 
 import com.github.alkhanm.movver.domain.entities.Driver;
-import com.github.alkhanm.movver.services.DriverService;
+import com.github.alkhanm.movver.services.mapper.DriverMapper;
+import com.github.alkhanm.movver.services.request.DriverResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.alkhanm.movver.services.DriverService;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/drivers")
 public class DriverController {
     private final DriverService service;
+    private final DriverMapper mapper;
 
-    public DriverController(DriverService service) {
+    public DriverController(DriverService service, DriverMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
-    private Driver findByUsernameOrPhoneNumber(){
+    @GetMapping
+    private @ResponseBody
+    DriverResponse findByPhoneNumber(@RequestParam String phoneNumber){
+        Driver driver = service.findByPhoneNumber(phoneNumber);
+        return mapper.toResponse(driver);
+    }
+
+    @PostMapping
+    private @ResponseBody
+    DriverResponse save(){
         return null;
     }
 
-    private Driver save(){
+    @PatchMapping
+    private @ResponseBody
+    DriverResponse update(){
         return null;
     }
 
-    private Driver update(){
+    @PutMapping
+    private @ResponseBody
+    DriverResponse replace(){
         return null;
     }
 
-    private Driver replace(){
-        return null;
-    }
-
-    private boolean delete(){
+    @DeleteMapping
+    private @ResponseStatus
+    boolean delete(){
         return false;
     }
 }
