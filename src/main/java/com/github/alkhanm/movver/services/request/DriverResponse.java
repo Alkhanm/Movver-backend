@@ -17,5 +17,5 @@ public class DriverResponse {
     String name;
     String phoneNumber;
 
-    Vehicle vehicle;
+    VehicleResponse vehicle;
 }

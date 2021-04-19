@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@AllArgsConstructor @NoArgsConstructor
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_client")
 public class Client {
 
@@ -20,4 +22,5 @@ public class Client {
     private String password;
 
     private LocalDateTime birthDate;
+
 }

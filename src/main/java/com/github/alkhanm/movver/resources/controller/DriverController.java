@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.alkhanm.movver.services.DriverService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/drivers")
 public class DriverController {
@@ -22,9 +25,15 @@ public class DriverController {
 
     @GetMapping
     private @ResponseBody
+    List<DriverResponse> findAllBy(){
+        return mapper.driverResponseList(service.findAllBy());
+    }
+
+    @GetMapping("/search")
+    private @ResponseBody
     DriverResponse findByPhoneNumber(@RequestParam String phoneNumber){
         Driver driver = service.findByPhoneNumber(phoneNumber);
-        return mapper.toResponse(driver);
+        return mapper.driverToResponse(driver);
     }
 
     @PostMapping

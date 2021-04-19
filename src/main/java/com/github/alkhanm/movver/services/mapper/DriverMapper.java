@@ -7,13 +7,17 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+import java.util.List;
+
+@Mapper(componentModel = "spring")
 public interface DriverMapper {
     DriverMapper INSTANCE = Mappers.getMapper(DriverMapper.class);
 
-    DriverResponse toResponse(Driver driver);
-    DriverRequest toRequest(Driver driver);
+    DriverResponse driverToResponse(Driver driver);
+    List<DriverResponse> driverResponseList(List<Driver> drivers);
 
-    Driver fromResponse(DriverResponse driver);
-    Driver fromRequest(DriverRequest driver);
+    DriverRequest driverToRequest(Driver driver);
+
+    Driver responseToDriver(DriverResponse driver);
+    Driver requestToDriver(DriverRequest driver);
 }
