@@ -2,7 +2,6 @@ package com.github.alkhanm.movver.services;
 
 import com.github.alkhanm.movver.domain.entities.Driver;
 import com.github.alkhanm.movver.repositories.DriverRepository;
-import com.github.alkhanm.movver.services.mapper.DriverMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 public class DriverService {
     private final DriverRepository repository;
 
-    public DriverService(DriverRepository repository, DriverMapper mapper) {
+    public DriverService(DriverRepository repository) {
         this.repository = repository;
     }
 
@@ -26,5 +25,4 @@ public class DriverService {
     public Driver save(Driver driver){
         return repository.save(driver);
     }
-
 }

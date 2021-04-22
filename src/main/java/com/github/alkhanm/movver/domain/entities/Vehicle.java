@@ -7,17 +7,17 @@ import javax.persistence.*;
 
 @Entity
 @Builder
-@Data
-@NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name ="tb_vehicle")
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    private VehicleModelEnum model;
-    private Integer capacity;
-    private String licensePlate;
-    private Boolean truckBodyWorkOpen;
-    private String color;
+    @Getter private long id;
+    @Getter private VehicleModelEnum model;
+    @Getter private int capacity;
+    @Getter private String licensePlate;
+    @Getter private boolean truckBodyWorkOpen;
+    @Getter private String color;
 }

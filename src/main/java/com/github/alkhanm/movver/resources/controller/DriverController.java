@@ -1,39 +1,36 @@
 package com.github.alkhanm.movver.resources.controller;
 
 import com.github.alkhanm.movver.domain.entities.Driver;
-import com.github.alkhanm.movver.services.mapper.DriverMapper;
-import com.github.alkhanm.movver.services.request.DriverResponse;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.github.alkhanm.movver.domain.entities.mapper.DriverMapper;
+import com.github.alkhanm.movver.domain.entities.transference.DriverResponse;
 import com.github.alkhanm.movver.services.DriverService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/drivers")
 public class DriverController {
     private final DriverService service;
-    private final DriverMapper mapper;
+    private final DriverMapper mapper = DriverMapper.INSTANCE;
 
-    public DriverController(DriverService service, DriverMapper mapper) {
+    public DriverController(DriverService service) {
         this.service = service;
-        this.mapper = mapper;
     }
 
     @GetMapping
     private @ResponseBody
     List<DriverResponse> findAllBy(){
-        return mapper.driverResponseList(service.findAllBy());
+        List<DriverResponse> responseList = mapper.toResponseList((service.findAllBy()));
+        return responseList;
     }
 
     @GetMapping("/search")
     private @ResponseBody
     DriverResponse findByPhoneNumber(@RequestParam String phoneNumber){
         Driver driver = service.findByPhoneNumber(phoneNumber);
-        return mapper.driverToResponse(driver);
+        DriverResponse driverResponse = mapper.toResponse(driver);
+        return driverResponse;
     }
 
     @PostMapping
