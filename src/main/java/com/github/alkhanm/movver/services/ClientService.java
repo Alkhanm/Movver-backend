@@ -2,16 +2,20 @@ package com.github.alkhanm.movver.services;
 
 import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.repositories.ClientRepository;
+import org.springframework.security.core.Transient;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 public class ClientService {
     private final ClientRepository repository;
-
-    public ClientService(ClientRepository repository) {
+    private final PasswordEncoder encoder;
+    public ClientService(ClientRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     public List<Client> findAllBy(){
@@ -22,7 +26,14 @@ public class ClientService {
         return repository.findByPhoneNumber(phoneNumber);
     }
 
-    public Client save(Client Client){
-        return repository.save(Client);
+    @Transactional
+    public Client save(Client c){
+        Client client = Client.builder()
+                .name(c.getName())
+                .phoneNumber(c.getPhoneNumber())
+                .birthDate(c.getBirthDate())
+                .password(encoder.encode(c.getPassword()))
+                .build();
+        return repository.save(client);
     }
 }

@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.resources.controller;
+package com.github.alkhanm.movver.resources;
 
 import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.domain.entities.mapper.ClientMapper;
@@ -21,16 +21,14 @@ public class ClientController {
     @GetMapping
     private @ResponseBody
     List<ClientResponse> findAllBy(){
-        List<ClientResponse> responseList = mapper.toResponseList(service.findAllBy());
-        return responseList;
+        return mapper.toResponseList(service.findAllBy());
     }
 
     @GetMapping("/search")
     private @ResponseBody
     ClientResponse findByPhoneNumber(@RequestParam String phoneNumber){
         Client client = service.findByPhoneNumber(phoneNumber);
-        ClientResponse clientResponse = mapper.toResponse(client);
-        return clientResponse;
+        return mapper.toResponse(client);
     }
 
     @PostMapping

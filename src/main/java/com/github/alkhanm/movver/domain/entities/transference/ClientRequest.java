@@ -1,13 +1,13 @@
 package com.github.alkhanm.movver.domain.entities.transference;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 public class ClientRequest {
-    @JsonSerialize final String name;
-    @JsonSerialize final String phoneNumber;
-    @JsonSerialize final LocalDateTime birthDate;
+    @Getter final String name;
+    @Getter final String phoneNumber;
+    @Getter final LocalDateTime birthDate;
 }

@@ -1,22 +1,18 @@
 package com.github.alkhanm.movver.domain.entities;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Entity
-@Builder
-@EqualsAndHashCode
-@AllArgsConstructor
+@ToString(callSuper = true)
+@SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @Table(name = "tb_client")
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter private long id;
-    @Getter private String name;
-    @Getter private String phoneNumber;
-    @Getter private String password;
-    @Getter private LocalDateTime birthDate;
+public class Client extends User {
+
 }

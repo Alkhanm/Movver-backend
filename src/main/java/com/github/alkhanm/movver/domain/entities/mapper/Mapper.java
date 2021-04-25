@@ -3,7 +3,7 @@ package com.github.alkhanm.movver.domain.entities.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface EntityMapper<Entity, Response, Request> {
+public interface Mapper<Entity, Response, Request> {
     Response toResponse(Entity entity);
     Request toRequest(Entity entity);
 

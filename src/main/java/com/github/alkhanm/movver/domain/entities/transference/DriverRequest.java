@@ -3,13 +3,14 @@ package com.github.alkhanm.movver.domain.entities.transference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.github.alkhanm.movver.domain.entities.Vehicle;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
 public class DriverRequest {
-    @JsonSerialize final String name;
-    @JsonSerialize final String location;
-    @JsonSerialize final boolean available;
-    @JsonSerialize final String phoneNumber;
-    @JsonSerialize final String password;
-    @JsonSerialize final Vehicle vehicle;
+    @Getter final String name;
+    @Getter final String location;
+    @Getter final boolean available;
+    @Getter final String phoneNumber;
+    @Getter final String password;
+    @Getter final VehicleRequest vehicle;
 }

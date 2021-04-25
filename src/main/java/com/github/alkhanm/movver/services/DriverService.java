@@ -1,7 +1,9 @@
 package com.github.alkhanm.movver.services;
 
+import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.domain.entities.Driver;
 import com.github.alkhanm.movver.repositories.DriverRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,12 +11,14 @@ import java.util.List;
 @Service
 public class DriverService {
     private final DriverRepository repository;
+    private final PasswordEncoder encoder;
 
-    public DriverService(DriverRepository repository) {
+    public DriverService(DriverRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
-    public List<Driver> findAllBy(){
+    public List<Driver> findAllBy() {
         return repository.findAll();
     }
 
@@ -22,7 +26,16 @@ public class DriverService {
         return repository.findByPhoneNumber(phoneNumber);
     }
 
-    public Driver save(Driver driver){
+    public Driver save(Driver d) {
+        Driver driver = Driver.builder()
+                .name(d.getName())
+                .phoneNumber(d.getPhoneNumber())
+                .birthDate(d.getBirthDate())
+                .password(encoder.encode(d.getPassword()))
+                .location(d.getLocation())
+                .available(d.isAvailable())
+                .vehicle(d.getVehicle())
+                .build();
         return repository.save(driver);
     }
 }
