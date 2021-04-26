@@ -18,7 +18,6 @@ import java.util.Date;
 @Service
 public class JwtService {
     private static final Logger log = LoggerFactory.getLogger(JwtService.class);
-
     @Value("${security.jwt.expiration}")
     private String expiration;
     @Value("${security.jwt.secret}")

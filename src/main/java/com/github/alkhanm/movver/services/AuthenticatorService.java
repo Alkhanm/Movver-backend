@@ -3,29 +3,27 @@ package com.github.alkhanm.movver.services;
 import com.github.alkhanm.movver.domain.entities.Credentials;
 import com.github.alkhanm.movver.domain.entities.User;
 import com.github.alkhanm.movver.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
+import com.github.alkhanm.movver.services.exceptions.InvalidCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticatorService implements UserDetailsService {
-    private final UserRepository<User> repository;
+    private final UserRepository repository;
 
     //Pega o codificador padrão
     private final PasswordEncoder encoder;
 
-    public AuthenticatorService(UserRepository<User> repository, PasswordEncoder encoder) {
+    public AuthenticatorService(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;
     }
 
     @Override public UserDetails loadUserByUsername(String phoneNumber)  {
         User user = repository.findByPhoneNumber(phoneNumber);
-        if (user == null) throw new UsernameNotFoundException("Usuário não encontrado");
+        if (user == null) throw new InvalidCredentialsException();
         return user;
     }
     public User authenticate(Credentials credentials){
