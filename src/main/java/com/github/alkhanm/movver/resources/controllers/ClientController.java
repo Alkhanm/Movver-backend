@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.resources;
+package com.github.alkhanm.movver.resources.controllers;
 
 import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.domain.entities.mapper.ClientMapper;

@@ -14,11 +14,13 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
-@Entity
+@
+        Entity
 @ToString
 @SuperBuilder
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "tb_user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,19 +28,19 @@ public abstract class User implements UserDetails {
     protected long id;
 
     @NotEmpty(message = "O nome não pode estar vazio")
-    @Getter
-    protected String name;
+    @Column(nullable = false)
+    @Getter protected String name;
 
     @NotEmpty(message = "O número de telefone não pode estar vazio")
-    @Getter
-    protected String phoneNumber;
+    @Column(nullable = false, unique = true)
+    @Getter protected String phoneNumber;
 
     @JsonIgnore
-    @Getter
-    protected String password;
+    @Column(nullable = false)
+    @Getter protected String password;
 
-    @Getter
-    protected LocalDateTime birthDate;
+    @Column(nullable = false)
+    @Getter protected LocalDateTime birthDate;
 
     @JsonIgnore @Override public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

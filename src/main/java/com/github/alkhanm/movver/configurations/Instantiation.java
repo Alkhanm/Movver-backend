@@ -20,8 +20,8 @@ import java.util.List;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
-    final DriverService driverService;
-    final ClientService clientService;
+    private final DriverService driverService;
+    private final ClientService clientService;
 
     public Instantiation(DriverService driverService, ClientService clientService) {
         this.driverService = driverService;
@@ -49,18 +49,22 @@ public class Instantiation implements CommandLineRunner {
                         .model(VehicleModelEnum.TYPE_5).build(),
                 Vehicle.builder().licensePlate("Gmz0117").color("laranja").capacity(2000).truckBodyWorkOpen(true)
                         .model(VehicleModelEnum.TYPE_3).build()
-
         );
         List<Driver> drivers = List.of(
                 Driver.builder().name("Marcos").password("senha").phoneNumber("63 96521-4312").location("0.1233, 0.755")
+                        .birthDate(LocalDateTime.of(1999, 12, 10, 0,0))
                         .vehicle(vehicles.get(1)).build(),
                 Driver.builder().name("Rogerio").password("senha").phoneNumber("51 96331-4612").location("0.2123, 0.2122")
+                        .birthDate(LocalDateTime.of(1999, 12, 10, 0,0))
                         .vehicle(vehicles.get(2)).build(),
                 Driver.builder().name("Pedro").password("senha").phoneNumber("11 94545-8214").location("0.342, 0.32")
+                        .birthDate(LocalDateTime.of(1999, 12, 10, 0,0))
                         .vehicle(vehicles.get(3)).build(),
                 Driver.builder().name("Lucas").password("senha").phoneNumber("11 96123-8242").location("0.312, 0.23")
+                        .birthDate(LocalDateTime.of(1999, 12, 10, 0,0))
                         .vehicle(vehicles.get(4)).build(),
                 Driver.builder().name("Matheus").password("senha").phoneNumber("61 96331-1112").location("0.123, 0.02")
+                        .birthDate(LocalDateTime.of(1999, 12, 10, 0,0))
                         .vehicle(vehicles.get(0)).build()
         );
         clients.forEach(clientService::save);

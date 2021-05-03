@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.resources;
+package com.github.alkhanm.movver.resources.controllers;
 
 import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.domain.entities.Credentials;
@@ -29,11 +29,4 @@ public class AuthController {
         String token = jwtService.generateToken(user);
         return new UserAuthenticated(user, token);
     }
-
-    @GetMapping
-    private @ResponseBody
-    User getAuthenticated(@AuthenticationPrincipal User user){
-        return user;
-    }
-
 }
