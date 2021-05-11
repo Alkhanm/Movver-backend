@@ -3,14 +3,11 @@ package com.github.alkhanm.movver.domain.entities.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface Mapper<Entity, Response, Request> {
-    Response toResponse(Entity entity);
-    Request toRequest(Entity entity);
+public interface Mapper<T, Response, Request> {
+    Response toResponse(T t);
+    T fromRequest(Request request);
 
-    Entity fromRequest(Request request);
-    Entity fromResponse(Response response);
-
-    default List<Response> toResponseList(List<Entity> entityList){
+    default List<Response> toResponseList(List<T> entityList){
         return entityList.stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());

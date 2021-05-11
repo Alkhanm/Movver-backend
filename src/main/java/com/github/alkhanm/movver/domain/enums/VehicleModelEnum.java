@@ -31,13 +31,5 @@ public enum VehicleModelEnum {
     public String toString(){
         return value;
     }
-
-    public static void main(String[] args) {
-        VehicleModelEnum enumm = VehicleModelEnum.to("VUC");
-        String enumValue = VehicleModelEnum.valueOf(enumm.name()).toString();
-        System.out.println(enumValue);
-        System.out.println(enumm.name());
-
-    }
 }
 

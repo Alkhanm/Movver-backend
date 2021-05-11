@@ -1,6 +1,7 @@
 package com.github.alkhanm.movver.domain.entities;
 
 import com.github.alkhanm.movver.domain.enums.VehicleModelEnum;
+import com.github.alkhanm.movver.domain.enums.VehicleTruckBodyEnum;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,6 @@ public class Vehicle {
     @Getter private VehicleModelEnum model;
     @Getter private int capacity;
     @Getter private String licensePlate;
-    @Getter private boolean truckBodyWorkOpen;
+    @Getter private VehicleTruckBodyEnum truckBodyWork;
     @Getter private String color;
 }

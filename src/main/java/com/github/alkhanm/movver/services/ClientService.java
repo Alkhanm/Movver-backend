@@ -2,7 +2,6 @@ package com.github.alkhanm.movver.services;
 
 import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.repositories.ClientRepository;
-import org.springframework.security.core.Transient;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +12,7 @@ import java.util.List;
 public class ClientService {
     private final ClientRepository repository;
     private final PasswordEncoder encoder;
+
     public ClientService(ClientRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
         this.encoder = encoder;
@@ -28,12 +28,7 @@ public class ClientService {
 
     @Transactional
     public Client save(Client c){
-        Client client = Client.builder()
-                .name(c.getName())
-                .phoneNumber(c.getPhoneNumber())
-                .birthDate(c.getBirthDate())
-                .password(encoder.encode(c.getPassword()))
-                .build();
+        Client client = (Client) c.toSave(encoder);
         return repository.save(client);
     }
 }

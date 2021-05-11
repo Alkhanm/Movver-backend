@@ -2,6 +2,7 @@ package com.github.alkhanm.movver.services;
 
 import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.domain.entities.Driver;
+import com.github.alkhanm.movver.domain.entities.User;
 import com.github.alkhanm.movver.repositories.DriverRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,15 +28,7 @@ public class DriverService {
     }
 
     public Driver save(Driver d) {
-        Driver driver = Driver.builder()
-                .name(d.getName())
-                .phoneNumber(d.getPhoneNumber())
-                .birthDate(d.getBirthDate())
-                .password(encoder.encode(d.getPassword()))
-                .location(d.getLocation())
-                .available(d.isAvailable())
-                .vehicle(d.getVehicle())
-                .build();
+        Driver driver = (Driver) d.toSave(encoder);
         return repository.save(driver);
     }
 }

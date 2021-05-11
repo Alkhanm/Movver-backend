@@ -99,6 +99,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<artifactId>spring-security-core</artifactId>
+			<groupId>org.springframework.security</groupId>
+			<version>5.5.0-M2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
