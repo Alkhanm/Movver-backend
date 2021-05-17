@@ -18,7 +18,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @Table(name = "tb_user")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
@@ -33,11 +33,10 @@ public abstract class User implements UserDetails {
     @Column(nullable = false, unique = true)
     @Getter protected String phoneNumber;
 
-    @JsonIgnore
     @Column(nullable = false)
     @Getter protected String password;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     @Getter protected LocalDateTime birthday;
 
     public User(String name, String password, String phoneNumber, LocalDateTime birthday) {

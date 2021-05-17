@@ -1,14 +1,9 @@
 package com.github.alkhanm.movver.domain.entities;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
-import org.springframework.core.codec.Encoder;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 @Entity
 @ToString(callSuper = true)

@@ -8,11 +8,9 @@ public class VehicleResponse {
     //Aqui o modelo do veiculo é retornado apenas como seu valor textual (enum -> string)
     @Getter final String model;
     @Getter final String truckBodyWork;
-
     @Getter final int capacity;
     @Getter final String licensePlate;
     @Getter final String color;
-
 
     public VehicleResponse(
             VehicleModelEnum model,

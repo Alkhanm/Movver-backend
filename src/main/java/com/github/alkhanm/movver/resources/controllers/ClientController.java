@@ -33,25 +33,8 @@ public class ClientController {
 
     @PostMapping
     private @ResponseBody
-    ClientResponse save(){
-        return null;
-    }
-
-    @PatchMapping
-    private @ResponseBody
-    ClientResponse update(){
-        return null;
-    }
-
-    @PutMapping
-    private @ResponseBody
-    ClientResponse replace(){
-        return null;
-    }
-
-    @DeleteMapping
-    private @ResponseStatus
-    boolean delete(){
-        return false;
+    ClientResponse save(@RequestBody Client request){
+        Client client = service.save(request);
+        return mapper.toResponse(client);
     }
 }

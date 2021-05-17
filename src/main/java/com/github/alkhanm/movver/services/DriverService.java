@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class DriverService {
+public class DriverService implements UserService<Driver> {
     private final DriverRepository repository;
     private final PasswordEncoder encoder;
 
@@ -27,7 +27,7 @@ public class DriverService {
         return repository.findByPhoneNumber(phoneNumber);
     }
 
-    public Driver save(Driver d) {
+    @Override public Driver save(Driver d) {
         Driver driver = (Driver) d.toSave(encoder);
         return repository.save(driver);
     }

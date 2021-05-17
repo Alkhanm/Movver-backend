@@ -6,6 +6,6 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.factory.Mappers;
 
 @org.mapstruct.Mapper(injectionStrategy = InjectionStrategy.CONSTRUCTOR)
-public interface ClientMapper extends Mapper<Client, ClientResponse, ClientResponse> {
+public interface ClientMapper extends Mapper<Client, ClientResponse> {
     ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 }

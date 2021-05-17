@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-
     private final AuthenticatorService authenticatorService;
     private final JwtService jwtService;
 
@@ -25,5 +24,11 @@ public class AuthController {
         User user = authenticatorService.authenticate(credentials);
         String token = jwtService.generateToken(user);
         return new UserAuthenticated(user, token);
+    }
+
+    @PostMapping("/token-validation")
+    private @ResponseBody
+    Boolean validateToken (@RequestBody String token) {
+        return jwtService.validateToken(token);
     }
 }

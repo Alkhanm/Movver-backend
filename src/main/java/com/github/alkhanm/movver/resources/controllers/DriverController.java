@@ -2,10 +2,8 @@ package com.github.alkhanm.movver.resources.controllers;
 
 import com.github.alkhanm.movver.domain.entities.Driver;
 import com.github.alkhanm.movver.domain.entities.mapper.DriverMapper;
-import com.github.alkhanm.movver.domain.entities.transference.DriverRequest;
 import com.github.alkhanm.movver.domain.entities.transference.DriverResponse;
 import com.github.alkhanm.movver.services.DriverService;
-import org.mapstruct.Mapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,26 +33,8 @@ public class DriverController {
 
     @PostMapping
     private @ResponseBody
-    DriverResponse save(@RequestBody DriverRequest request){
-        Driver requestDriver = service.save(mapper.fromRequest(request));
-        return mapper.toResponse((requestDriver));
-    }
-
-    @PatchMapping
-    private @ResponseBody
-    DriverResponse update(){
-        return null;
-    }
-
-    @PutMapping
-    private @ResponseBody
-    DriverResponse replace(){
-        return null;
-    }
-
-    @DeleteMapping
-    private @ResponseStatus
-    boolean delete(){
-        return false;
+    DriverResponse save(@RequestBody Driver requestDriver){
+        Driver driver = service.save(requestDriver);
+        return mapper.toResponse(driver);
     }
 }

@@ -7,6 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EntityRepository<T extends User> extends JpaRepository<T, Long> {
+public interface UserRepository<T extends User> extends JpaRepository<T, Long> {
     T findByPhoneNumber(String phoneNumber);
 }

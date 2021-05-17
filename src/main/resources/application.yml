@@ -10,5 +10,5 @@ spring:
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 security:
   jwt:
-    expiration: 12
+    expiration: 240
     secret: "bWFjYWNvIGxvdWNvIGUgYXMgbWVuaW5hcyBzdXBlciBwb2Vyb3Nhc3NmIGZzIGZmam0gYndzZ3l1aiBxcyBhZ2JzbHdpIG3Dp2xha3Nw"

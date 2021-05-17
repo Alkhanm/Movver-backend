@@ -2,17 +2,13 @@ package com.github.alkhanm.movver.configurations;
 
 import com.github.alkhanm.movver.domain.entities.Client;
 import com.github.alkhanm.movver.domain.entities.Driver;
-import com.github.alkhanm.movver.domain.entities.User;
 import com.github.alkhanm.movver.domain.entities.Vehicle;
 import com.github.alkhanm.movver.domain.enums.VehicleModelEnum;
 import com.github.alkhanm.movver.domain.enums.VehicleTruckBodyEnum;
-import com.github.alkhanm.movver.repositories.EntityRepository;
-import com.github.alkhanm.movver.services.AuthenticatorService;
 import com.github.alkhanm.movver.services.ClientService;
 import com.github.alkhanm.movver.services.DriverService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 import java.util.List;
