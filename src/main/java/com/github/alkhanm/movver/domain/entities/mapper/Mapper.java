@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface Mapper<Entity, Response> {
-    Response toResponse(Entity r);
+    Response toResponse(Entity entity);
 
     default List<Response> toResponseList(List<Entity> entityList){
         return entityList.stream()

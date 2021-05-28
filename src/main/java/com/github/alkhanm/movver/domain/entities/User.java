@@ -1,9 +1,11 @@
 package com.github.alkhanm.movver.domain.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,8 +19,9 @@ import java.util.Collection;
 @ToString
 @NoArgsConstructor
 @Table(name = "tb_user")
+@SuperBuilder
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class User implements UserDetails {
+public abstract class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter

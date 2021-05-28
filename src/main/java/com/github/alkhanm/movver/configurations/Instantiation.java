@@ -44,16 +44,16 @@ public class Instantiation implements CommandLineRunner {
                         .model(VehicleModelEnum.TYPE_3).build()
         );
         List<Driver> drivers = List.of(
-                new Driver ("Marcos", "senha", "(63) 96521-4312",
-                         LocalDateTime.of(1999, 12, 10, 0,0),
-                        true,
-                        "0.1233, 0.755",
-                         vehicles.get(1)),
+                new Driver ("Jorge", "senha", "(51) 96231-4618",
+                        LocalDateTime.of(1989, 12, 10, 0,0),
+                        false,
+                        "0.2123, 0.2122",
+                        vehicles.get(2)),
                 new Driver ("Rogerio", "senha", "(51) 96331-4612",
                          LocalDateTime.of(1999, 12, 10, 0,0),
                          false,
                         "0.2123, 0.2122",
-                         vehicles.get(2)),
+                         vehicles.get(1)),
                 new Driver ("Pedro", "senha", "(11) 94545-8214",
                          LocalDateTime.of(1999, 12, 10, 0,0),
                          true,
