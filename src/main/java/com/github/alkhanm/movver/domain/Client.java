@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.domain.entities;
+package com.github.alkhanm.movver.domain;
 
 import lombok.*;
 

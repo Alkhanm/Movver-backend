@@ -1,10 +1,10 @@
 package com.github.alkhanm.movver.resources.controllers;
 
-import com.github.alkhanm.movver.domain.entities.Client;
-import com.github.alkhanm.movver.domain.entities.transference.ClientResponse;
-import com.github.alkhanm.movver.domain.entities.transference.Credentials;
-import com.github.alkhanm.movver.domain.entities.User;
-import com.github.alkhanm.movver.domain.entities.transference.UserAuthenticated;
+import com.github.alkhanm.movver.domain.mapper.UserMapper;
+import com.github.alkhanm.movver.domain.transference.Credentials;
+import com.github.alkhanm.movver.domain.User;
+import com.github.alkhanm.movver.domain.transference.UserAuthenticated;
+import com.github.alkhanm.movver.domain.transference.UserResponse;
 import com.github.alkhanm.movver.services.AuthenticatorService;
 import com.github.alkhanm.movver.services.JwtService;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +23,9 @@ public class AuthController {
     @PostMapping
     private @ResponseBody
     UserAuthenticated login (@RequestBody Credentials credentials) {
-        User user = authenticatorService.authenticate(credentials);
-        String token = jwtService.generateToken(user);
+        User userAuthenticated = authenticatorService.authenticate(credentials);
+        String token = jwtService.generateToken(userAuthenticated);
+        UserResponse user = UserMapper.INSTANCE.toResponse(userAuthenticated);
         return new UserAuthenticated(user, token);
     }
 

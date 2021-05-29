@@ -1,6 +1,6 @@
 package com.github.alkhanm.movver.services;
 
-import com.github.alkhanm.movver.domain.entities.User;
+import com.github.alkhanm.movver.domain.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;

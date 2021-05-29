@@ -1,9 +1,7 @@
 package com.github.alkhanm.movver.repositories;
 
-import com.github.alkhanm.movver.domain.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.alkhanm.movver.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 @Repository

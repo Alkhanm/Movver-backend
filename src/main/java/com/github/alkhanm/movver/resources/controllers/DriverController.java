@@ -1,8 +1,8 @@
 package com.github.alkhanm.movver.resources.controllers;
 
-import com.github.alkhanm.movver.domain.entities.Driver;
-import com.github.alkhanm.movver.domain.entities.mapper.DriverMapper;
-import com.github.alkhanm.movver.domain.entities.transference.DriverResponse;
+import com.github.alkhanm.movver.domain.Driver;
+import com.github.alkhanm.movver.domain.mapper.DriverMapper;
+import com.github.alkhanm.movver.domain.transference.DriverResponse;
 import com.github.alkhanm.movver.services.DriverService;
 import org.springframework.web.bind.annotation.*;
 

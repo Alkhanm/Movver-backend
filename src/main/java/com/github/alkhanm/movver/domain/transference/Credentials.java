@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.domain.entities.transference;
+package com.github.alkhanm.movver.domain.transference;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

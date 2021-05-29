@@ -1,7 +1,5 @@
-package com.github.alkhanm.movver.domain.entities.transference;
+package com.github.alkhanm.movver.domain.transference;
 
-import com.github.alkhanm.movver.domain.enums.VehicleModelEnum;
-import com.github.alkhanm.movver.domain.enums.VehicleTruckBodyEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

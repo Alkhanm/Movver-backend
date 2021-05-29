@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.domain.entities.observers;
+package com.github.alkhanm.movver.domain.design.patterns.observers;
 
 public interface FreightObserver {
     void notifyAcceptance();

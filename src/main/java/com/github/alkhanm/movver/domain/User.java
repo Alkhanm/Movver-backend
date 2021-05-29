@@ -1,7 +1,6 @@
-package com.github.alkhanm.movver.domain.entities;
+package com.github.alkhanm.movver.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -13,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 @Entity
@@ -39,14 +39,14 @@ public abstract class User implements UserDetails {
     @Column(nullable = false)
     @Getter protected String password;
 
-//    @Column(nullable = false)
-    @Getter protected LocalDateTime birthday;
+    @Column(nullable = false)
+    protected LocalDateTime birthdate;
 
-    public User(String name, String password, String phoneNumber, LocalDateTime birthday) {
+    public User(String name, String password, String phoneNumber, LocalDateTime birthdate) {
         this.name = name;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.birthday = birthday;
+        this.birthdate = birthdate;
     }
 
     public final User toSave(PasswordEncoder encoder){

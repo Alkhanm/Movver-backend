@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.domain.entities;
+package com.github.alkhanm.movver.domain;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -20,8 +20,7 @@ public class Location {
 
     public Location() {}
 
-    public Location(Long id, String name, Double latitude, Double longitude) {
-        this.id = id;
+    public Location(String name, Double latitude, Double longitude) {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;

@@ -1,8 +1,6 @@
-package com.github.alkhanm.movver.domain.entities;
+package com.github.alkhanm.movver.domain;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,12 +13,14 @@ import java.time.LocalDateTime;
 @Table(name = "tb_driver")
 public class Driver extends User {
     @Getter private boolean available;
-    @Getter private String location;
+
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    @Getter private Location location;
 
     @OneToOne(targetEntity = Vehicle.class, cascade = CascadeType.PERSIST)
     @Getter private Vehicle vehicle;
 
-    public Driver(String name, String password, String phoneNumber, LocalDateTime birthDate, boolean available, String location, Vehicle vehicle) {
+    public Driver(String name, String password, String phoneNumber, LocalDateTime birthDate, boolean available, Location location, Vehicle vehicle) {
         super(name, password, phoneNumber, birthDate);
         this.available = available;
         this.location = location;

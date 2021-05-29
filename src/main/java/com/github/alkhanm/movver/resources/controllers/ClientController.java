@@ -1,8 +1,8 @@
 package com.github.alkhanm.movver.resources.controllers;
 
-import com.github.alkhanm.movver.domain.entities.Client;
-import com.github.alkhanm.movver.domain.entities.mapper.ClientMapper;
-import com.github.alkhanm.movver.domain.entities.transference.ClientResponse;
+import com.github.alkhanm.movver.domain.Client;
+import com.github.alkhanm.movver.domain.mapper.ClientMapper;
+import com.github.alkhanm.movver.domain.transference.ClientResponse;
 import com.github.alkhanm.movver.services.ClientService;
 import org.springframework.web.bind.annotation.*;
 

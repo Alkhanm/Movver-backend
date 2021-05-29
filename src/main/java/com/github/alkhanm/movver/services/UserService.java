@@ -1,6 +1,6 @@
 package com.github.alkhanm.movver.services;
 
-import com.github.alkhanm.movver.domain.entities.User;
+import com.github.alkhanm.movver.domain.User;
 
 import java.util.List;
 

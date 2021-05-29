@@ -1,9 +1,11 @@
 package com.github.alkhanm.movver.services;
 
-import com.github.alkhanm.movver.domain.entities.transference.Credentials;
-import com.github.alkhanm.movver.domain.entities.User;
+import com.github.alkhanm.movver.domain.transference.Credentials;
+import com.github.alkhanm.movver.domain.User;
 import com.github.alkhanm.movver.repositories.UserRepository;
 import com.github.alkhanm.movver.services.exceptions.InvalidCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,10 +28,16 @@ public class AuthenticatorService implements UserDetailsService {
         if (user == null) throw new InvalidCredentialsException();
         return user;
     }
+
     public User authenticate(Credentials credentials){
         User user = (User) loadUserByUsername(credentials.phoneNumber());
         boolean isValid = encoder.matches(credentials.password(), user.getPassword());
         if (isValid) return user;
         throw new InvalidCredentialsException();
+    }
+
+    public User getUserAuthenticated(){
+        Authentication userAuthenticated = SecurityContextHolder.getContext().getAuthentication();
+        return (User) userAuthenticated.getPrincipal();
     }
 }
