@@ -1,6 +1,7 @@
 package com.github.alkhanm.movver.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.alkhanm.movver.utils.DateUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -11,7 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
@@ -40,13 +43,13 @@ public abstract class User implements UserDetails {
     @Getter protected String password;
 
     @Column(nullable = false)
-    protected LocalDateTime birthdate;
+    @Getter protected LocalDateTime birthdate;
 
-    public User(String name, String password, String phoneNumber, LocalDateTime birthdate) {
+    public User(String name, String password, String phoneNumber, Long birthdate) {
         this.name = name;
         this.password = password;
         this.phoneNumber = phoneNumber;
-        this.birthdate = birthdate;
+        setBirthdate(birthdate);
     }
 
     public final User toSave(PasswordEncoder encoder){
@@ -58,6 +61,10 @@ public abstract class User implements UserDetails {
     public static String removePhoneMask(String phoneNumber){
         //Remove tudo que ñ for numérico
         return phoneNumber.replaceAll("[^0-9]", "");
+    }
+
+    public void setBirthdate(Long birthdateMilliseconds) {
+        this.birthdate = DateUtil.millisecondsToDate(birthdateMilliseconds);
     }
 
     @JsonIgnore @Override public Collection<? extends GrantedAuthority> getAuthorities() {

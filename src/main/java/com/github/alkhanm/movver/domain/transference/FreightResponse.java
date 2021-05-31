@@ -3,29 +3,27 @@ package com.github.alkhanm.movver.domain.transference;
 import com.github.alkhanm.movver.domain.Location;
 import com.github.alkhanm.movver.domain.enums.FreightServiceEnum;
 import com.github.alkhanm.movver.domain.enums.FreightStatusEnum;
+import com.github.alkhanm.movver.utils.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
+@ToString
 @AllArgsConstructor
-@Getter @ToString
 public class FreightResponse {
-    final Long id;
-    final String startDate, endDate;
-    final String description;
-    final int weight = 0;
-    final double price, distance = 0.0;
-    final Location origin, destination;
-    final ClientResponse client;
-    final DriverResponse driver;
-    final FreightStatusEnum status;
-    final FreightServiceEnum service;
+    @Getter final Long id;
 
-    public String getService() {
-        return service.toString();
-    }
+    @Getter final String description;
+    @Getter final int weight = 0;
+    @Getter final double price, distance = 0.0;
+    @Getter final Location origin, destination;
+    @Getter final ClientResponse client;
+    @Getter final DriverResponse driver;
 
-    public String getStatus() {
-        return status.toString();
-    }
+     @Getter final LocalDateTime startDate, endDate;
+     @Getter final FreightStatusEnum status;
+     @Getter final FreightServiceEnum service;
+
 }

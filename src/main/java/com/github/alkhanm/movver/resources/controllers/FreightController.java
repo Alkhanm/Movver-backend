@@ -21,13 +21,12 @@ public class FreightController {
     @GetMapping
     private @ResponseBody
     List<FreightResponse> findAll(){
-        System.out.println(service.list());
         return mapper.toResponseList(service.list());
     }
 
     @PostMapping
     private @ResponseBody
-    FreightResponse save(@RequestBody Freight requestFreight){
-        return mapper.toResponse(service.save(requestFreight));
+    FreightResponse save(@RequestBody Freight freight){
+        return mapper.toResponse(service.save(freight));
     }
 }

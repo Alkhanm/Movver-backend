@@ -1,60 +1,92 @@
 package com.github.alkhanm.movver.domain;
 
+import com.github.alkhanm.movver.domain.design.patterns.states.FreightStatus;
+import com.github.alkhanm.movver.domain.design.patterns.states.FreightUnconfirmedStatus;
+import com.github.alkhanm.movver.domain.design.patterns.strategies.HomeMovingCalculator;
+import com.github.alkhanm.movver.domain.design.patterns.strategies.MaterialTransportCalculator;
 import com.github.alkhanm.movver.domain.enums.FreightServiceEnum;
-import com.github.alkhanm.movver.domain.enums.FreightStatusEnum;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import com.github.alkhanm.movver.utils.DateUtil;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @EqualsAndHashCode
-@Getter @ToString
+@ToString
 @Table(name = "tb_freight")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Freight {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Getter private long id;
+    @Getter private String description;
+    @Getter private int weight = 0;
+    @Getter private double distance = 0.0;
+    @Getter private LocalDateTime startDate, endDate;
+    @Getter private FreightServiceEnum service;
 
-    private String startDate;
-    private String endDate;
-    private int weight = 0;
-    private double price = 50.00, distance = 0.0;
-    private String description;
+    @Getter private double price;
 
-    private FreightStatusEnum status;
-    private FreightServiceEnum service;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @Getter private Location origin, destination;
 
-    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-    private Location origin;
+    @OneToOne @Getter private Client client;
+    @OneToOne @Getter private Driver driver;
 
-    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-    private Location destination;
+    @Transient
+    private FreightStatus status = new FreightUnconfirmedStatus(this);
 
-    @OneToOne
-    private Client client;
-
-    @OneToOne
-    private Driver driver;
-
-    public Freight() {}
+    public Freight(Client client) {
+        this.client = client;
+    }
 
     public Freight(
-            String startDate, String endDate, double distance,
-            FreightStatusEnum status, FreightServiceEnum service, int weight,
-            double price, String description, Location origin, Location destination,
-            Client client, Driver driver) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.distance = distance;
-        this.status = status;
-        this.service = service;
-        this.weight = weight;
-        this.price = price;
-        this.description = description;
-        this.origin = origin;
-        this.destination = destination;
+            Client client, Driver driver,
+            Location origin, Location destination,
+            long startDate, long endDate,
+            double distance,
+            int weight,
+            FreightServiceEnum service) {
         this.client = client;
         this.driver = driver;
+        this.origin = origin;
+        this.destination = destination;
+        this.weight = weight;
+        setEndDate(endDate);
+        setStartDate(startDate);
+        this.distance = distance;
+        this.service = service;
     }
+
+
+
+    public void calculatePrice() {
+        this.price = switch (service) {
+            case HOME_MOVING -> new HomeMovingCalculator().calculate(this);
+            case MATERIAL_TRANSPORT -> new MaterialTransportCalculator().calculate(this);
+        };
+    }
+
+    public void confirm() {
+        status.confirm();
+    }
+    public void start() {
+        status.start();
+    }
+    public void finish() {
+        status.finish();
+    }
+    public void cancel() {
+        status.cancel();
+    }
+
+    public void setStartDate(long startDate) {
+        this.startDate = DateUtil.millisecondsToDate(startDate);
+    }
+    public void setEndDate(long endDate) {
+        this.endDate = DateUtil.millisecondsToDate(endDate);
+    }
+
 }

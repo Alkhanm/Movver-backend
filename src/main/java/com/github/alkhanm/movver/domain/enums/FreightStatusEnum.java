@@ -1,14 +1,11 @@
 package com.github.alkhanm.movver.domain.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Arrays;
 
 public enum FreightStatusEnum {
-    TYPE_1("Aguardando"),
-    TYPE_2("Cancelada"),
-    TYPE_3("Finalizada");
+    WAITING("Aguardando"),
+    CANCELED("Cancelada"),
+    FINISHED("Finalizada");
 
     private final String value;
 
@@ -16,9 +13,14 @@ public enum FreightStatusEnum {
         value = enumValue;
     }
 
-    @Override
-    public String toString(){
+    @Override public String toString(){
         return value;
+    }
+    public static FreightStatusEnum of(String value){
+        return Arrays.stream(FreightStatusEnum.values())
+                .filter(v -> v.toString().equals(value))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Nem um tipo enumerável corresponde a este valor: " + value));
     }
 }
 

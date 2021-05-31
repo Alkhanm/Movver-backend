@@ -1,6 +1,7 @@
 package com.github.alkhanm.movver.domain.transference;
 
 import com.github.alkhanm.movver.domain.Location;
+import com.github.alkhanm.movver.utils.DateUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;

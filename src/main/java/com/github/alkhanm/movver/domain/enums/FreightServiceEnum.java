@@ -1,13 +1,10 @@
 package com.github.alkhanm.movver.domain.enums;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Arrays;
 
 public enum FreightServiceEnum {
-    TYPE_1("Mudança"),
-    TYPE_2("Transporte de Materiais");
+    MATERIAL_TRANSPORT("Transporte de Materiais"),
+    HOME_MOVING("Mudança");
 
     private final String value;
 
@@ -18,6 +15,13 @@ public enum FreightServiceEnum {
     @Override
     public String toString(){
         return value;
+    }
+
+    public static FreightServiceEnum of(String value){
+        return Arrays.stream(FreightServiceEnum.values())
+                .filter(v -> v.toString().equalsIgnoreCase(value))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Nem um tipo enumerável corresponde a este valor: " + value));
     }
 }
 

@@ -20,7 +20,7 @@ public class Driver extends User {
     @OneToOne(targetEntity = Vehicle.class, cascade = CascadeType.PERSIST)
     @Getter private Vehicle vehicle;
 
-    public Driver(String name, String password, String phoneNumber, LocalDateTime birthDate, boolean available, Location location, Vehicle vehicle) {
+    public Driver(String name, String password, String phoneNumber, Long birthDate, boolean available, Location location, Vehicle vehicle) {
         super(name, password, phoneNumber, birthDate);
         this.available = available;
         this.location = location;

@@ -22,9 +22,7 @@ public class FreightService {
 
     public List<Freight> list(){
         Client userAuthenticated = (Client) authenticatorService.getUserAuthenticated();
-        var list = repository.findFreightByClient(userAuthenticated);
-        System.out.println(list);
-        return list;
+        return repository.findFreightByClient(userAuthenticated);
     }
 
    @Transactional
