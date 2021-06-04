@@ -19,8 +19,8 @@ public enum VehicleTruckBodyEnum {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Nem um tipo enumerável corresponde a este valor: " + value));
     }
+
     @Override  public String toString(){
         return value;
     }
 }
-

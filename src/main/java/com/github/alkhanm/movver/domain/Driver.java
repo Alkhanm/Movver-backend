@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Table(name = "tb_driver")
 public class Driver extends User {
     @Getter private boolean available;
+    @Getter private String cpf;
 
     @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
     @Getter private Location location;

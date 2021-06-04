@@ -1,16 +1,21 @@
 package com.github.alkhanm.movver.domain.transference;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @Getter @ToString
 public class VehicleResponse {
-    //Aqui o modelo do veiculo é retornado apenas como seu valor textual (enum -> string)
-    final String model;
-    final String truckBodyWork;
-    final int capacity;
-    final String licensePlate;
-    final String color;
+    private final String model;
+    private final String truckBodyWork;
+    private final int capacity;
+    private final String licensePlate;
+    private final String color;
+
+    public VehicleResponse(String model, String truckBodyWork, int capacity, String licensePlate, String color) {
+        this.model = model;
+        this.truckBodyWork = truckBodyWork;
+        this.capacity = capacity;
+        this.licensePlate = licensePlate;
+        this.color = color;
+    }
 }
