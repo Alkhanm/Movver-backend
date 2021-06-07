@@ -30,8 +30,8 @@ public class AuthenticatorService implements UserDetailsService {
     }
 
     public User authenticate(Credentials credentials){
-        User user = (User) loadUserByUsername(credentials.phoneNumber());
-        boolean isValid = encoder.matches(credentials.password(), user.getPassword());
+        User user = (User) loadUserByUsername(credentials.getPhoneNumber());
+        boolean isValid = encoder.matches(credentials.getPassword(), user.getPassword());
         if (isValid) return user;
         throw new InvalidCredentialsException();
     }

@@ -1,14 +1,12 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/movver-test
-    username: postgres
-    password: root
+    url: ${DATABASE_URL}
   jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create
+    show-sql: false
 security:
   jwt:
-    expiration: 240
-    secret: "bWFjYWNvIGxvdWNvIGUgYXMgbWVuaW5hcyBzdXBlciBwb2Vyb3Nhc3NmIGZzIGZmam0gYndzZ3l1aiBxcyBhZ2JzbHdpIG3Dp2xha3Nw"
+    expiration: ${EXPIRATION}
+    secret: ${SECRET}
