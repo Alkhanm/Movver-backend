@@ -102,6 +102,7 @@ public class Freight {
     public void setStartDate(long startDate) {
         this.startDate = DateUtil.millisecondsToDate(startDate);
     }
+
     public void setEndDate(long endDate) {
         this.endDate = DateUtil.millisecondsToDate(endDate);
     }

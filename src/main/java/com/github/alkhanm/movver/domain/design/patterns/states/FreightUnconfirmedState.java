@@ -22,14 +22,14 @@ public class FreightUnconfirmedState implements FreightState {
 
     @Override
     public void start() {
-       throw new InvalidActionException("Erro ao iniciar frete: O frete ainda não foi confirmado");
+       System.out.println("Erro ao iniciar frete: O frete ainda não foi confirmado");
     }
     @Override
     public void finish() {
-       throw new InvalidActionException("Erro ao finalizar frete: O frete ainda não foi iniciado");
+       System.out.println("Erro ao finalizar frete: O frete ainda não foi iniciado");
     }
     @Override
     public void cancel() {
-       throw new InvalidActionException("Erro ao cancelar frete: O frete ainda não foi iniciado");
+       System.out.println("Erro ao cancelar frete: O frete ainda não foi iniciado");
     }
 }

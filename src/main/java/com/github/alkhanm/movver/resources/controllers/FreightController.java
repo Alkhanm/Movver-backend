@@ -34,24 +34,21 @@ public class FreightController {
     private @ResponseBody
     FreightResponse confirm(@RequestBody Freight freightRequest){
         Freight freightConfirm = freightRequest.confirm();
-        var saved = mapper.toResponse(service.save(freightConfirm));
-        return saved;
+        return mapper.toResponse(service.save(freightConfirm));
     }
 
     @PatchMapping("/{id}/start")
     private @ResponseBody
     FreightResponse start(@PathVariable Long id){
         Freight freight = service.findById(id);
-        freight.setState(new FreightConfirmedState(freight));
-        return mapper.toResponse(service.update(id, freight.start()));
+        return mapper.toResponse(service.save(freight.confirm().start()));
     }
 
     @PatchMapping("/{id}/finish")
     private @ResponseBody
     FreightResponse finish(@PathVariable Long id){
         Freight freight = service.findById(id);
-        freight.setState(new FreightStartedState(freight));
-        return mapper.toResponse(service.update(id, freight.finish()));
+        return mapper.toResponse(service.update(id, freight.confirm().start().finish()));
     }
 
     @DeleteMapping("/{id}")

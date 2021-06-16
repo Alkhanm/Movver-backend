@@ -17,18 +17,18 @@ public class FreightFinishedState implements FreightState {
 
     @Override
     public void confirm() {
-        throw new InvalidActionException("O frete já foi finalizado");
+        System.out.println("O frete já foi finalizado");
     }
     @Override
     public void start() {
-        throw new InvalidActionException("O frete já foi finalizado");
+        System.out.println("O frete já foi finalizado");
     }
     @Override
     public void cancel() {
-        throw new InvalidActionException("O frete já foi finalizado");
+        System.out.println("O frete já foi finalizado");
     }
     @Override
     public void finish() {
-        throw new InvalidActionException("O frete já foi finalizado");
+        System.out.println("O frete já foi finalizado");
     }
 }

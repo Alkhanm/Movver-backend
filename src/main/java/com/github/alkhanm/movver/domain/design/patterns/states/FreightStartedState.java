@@ -21,12 +21,12 @@ public class FreightStartedState implements FreightState {
     }
 
     @Override public void cancel() {
-        throw new InvalidActionException("Erro ao cancelar frete: Não é possível cancelar um frete em andamento");
+        System.out.println("Erro ao cancelar frete: Não é possível cancelar um frete em andamento");
     }
     @Override public void confirm() {
-        throw new InvalidActionException("Erro ao confirmar o frete: O frete já foi confirmado");
+        System.out.println("Erro ao confirmar o frete: O frete já foi confirmado");
     }
     @Override public void start() {
-        throw new InvalidActionException("Erro ao iniciar o frete: O frete já foi iniciado");
+        System.out.println("Erro ao iniciar o frete: O frete já foi iniciado");
     }
 }

@@ -23,42 +23,31 @@ public class Instantiation implements CommandLineRunner {
     public static List<Client> clients = List.of(
             new Client("Gabriela", "senha1223", "(22) 92343-1673",
                     Instant.parse("1987-02-20T21:20:41Z").toEpochMilli()),
-            new Client("Joás", "Senha101", "(99) 99999-9999",
+            new Client("Joás", "senha101", "(99) 99999-9999",
                     Instant.parse("1998-11-11T11:11:11Z").toEpochMilli()),
             new Client("Pedro", "senha", "(61) 91243-5312",
                     Instant.parse("2001-07-10T21:20:41Z").toEpochMilli())
     );
 
     public static List<Vehicle> vehicles = List.of(
-            Vehicle.builder()
-                    .licensePlate("Kdc5475")
-                    .color("preto")
-                    .capacity(6000)
-                    .truckBodyWork(VehicleTruckBodyEnum.OPEN)
+            Vehicle.builder().licensePlate("Kdc5475")
+                    .color("preto").capacity(6000).truckBodyWork(VehicleTruckBodyEnum.OPEN)
                     .model(VehicleModelEnum.TYPE3).build(),
             Vehicle.builder()
                     .licensePlate("Rbw0A48")
-                    .color("branco")
-                    .capacity(5500)
-                    .truckBodyWork(VehicleTruckBodyEnum.CLOSED)
+                    .color("branco").capacity(5500).truckBodyWork(VehicleTruckBodyEnum.CLOSED)
                     .model(VehicleModelEnum.TYPE2).build(),
             Vehicle.builder()
                     .licensePlate("Qtp0666")
-                    .color("azul")
-                    .capacity(10000)
-                    .truckBodyWork(VehicleTruckBodyEnum.OPEN)
+                    .color("azul").capacity(10000).truckBodyWork(VehicleTruckBodyEnum.OPEN)
                     .model(VehicleModelEnum.TYPE6).build(),
             Vehicle.builder()
                     .licensePlate("Ngd9737")
-                    .color("prata")
-                    .capacity(1000)
-                    .truckBodyWork(VehicleTruckBodyEnum.CLOSED)
+                    .color("prata").capacity(1000).truckBodyWork(VehicleTruckBodyEnum.CLOSED)
                     .model(VehicleModelEnum.TYPE5).build(),
             Vehicle.builder()
                     .licensePlate("Gmz0117")
-                    .color("laranja")
-                    .capacity(2000)
-                    .truckBodyWork(VehicleTruckBodyEnum.CLOSED)
+                    .color("laranja").capacity(2000).truckBodyWork(VehicleTruckBodyEnum.CLOSED)
                     .model(VehicleModelEnum.TYPE3).build()
     );
     public static List<Driver> drivers = List.of(

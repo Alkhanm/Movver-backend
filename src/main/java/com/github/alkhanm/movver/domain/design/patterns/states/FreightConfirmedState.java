@@ -21,7 +21,7 @@ public class FreightConfirmedState implements FreightState {
 
     //Envia o frete para o estado iniciado (FreightStartedState)
     @Override public void start() {
-        //freight.setStartDate(DateUtil.dateToMilliseconds(LocalDateTime.now()));
+        freight.setStartDate(DateUtil.dateToMilliseconds(LocalDateTime.now()));
         freight.setState(new FreightStartedState(freight));
     }
 
@@ -32,11 +32,11 @@ public class FreightConfirmedState implements FreightState {
 
     @Override
     public void finish() {
-        throw new InvalidActionException("Erro ao finalizar o frete: o frete ainda não foi iniciado");
+        System.out.println("Erro ao finalizar o frete: o frete ainda não foi iniciado");
     }
 
     @Override
     public void confirm() {
-        throw new InvalidActionException("Erro ao confirmar o frete: o frete já foi confirmado");
+        System.out.println("Erro ao confirmar o frete: o frete já foi confirmado");
     }
 }
