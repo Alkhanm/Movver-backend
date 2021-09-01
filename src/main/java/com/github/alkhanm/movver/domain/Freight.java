@@ -1,8 +1,6 @@
 package com.github.alkhanm.movver.domain;
 
 import com.github.alkhanm.movver.configurations.Instantiation;
-import com.github.alkhanm.movver.domain.design.patterns.states.FreightState;
-import com.github.alkhanm.movver.domain.design.patterns.states.FreightUnconfirmedState;
 import com.github.alkhanm.movver.domain.design.patterns.strategies.FreightCalculator;
 import com.github.alkhanm.movver.domain.design.patterns.strategies.HomeMovingCalculator;
 import com.github.alkhanm.movver.domain.design.patterns.strategies.MaterialTransportCalculator;
@@ -13,6 +11,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.concurrent.ExecutionException;
 
 @Entity
 @EqualsAndHashCode
@@ -23,33 +22,46 @@ import java.time.LocalDateTime;
 public class Freight {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Getter private long id;
-    @Getter private String description;
-    @Getter private int weight;
-    @Getter private double distance;
-    @Getter private double price;
+    @Getter
+    private long id;
+    @Getter
+    private String description;
+    @Getter
+    private int weight;
+    @Getter
+    private double distance;
+    @Getter
+    private double price;
 
-    @Getter private LocalDateTime startDate;
-    @Getter private LocalDateTime endDate;
+    @Getter
+    private LocalDateTime startDate;
+    @Getter
+    private LocalDateTime endDate;
 
-    @Getter private FreightServiceEnum service;
-    @Getter private FreightStatusEnum status;
+    @Getter
+    private FreightServiceEnum service;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @Getter private Location origin;
+    @Getter
+    private Location origin;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @Getter private Location destination;
+    @Getter
+    private Location destination;
 
-    @OneToOne @Getter private Client client;
-    @OneToOne @Getter private Driver driver;
+    @Getter
+    private FreightStatusEnum status = FreightStatusEnum.UNCONFIRMED;
 
-    @Transient
-    private FreightState state = new FreightUnconfirmedState(this);
+    @OneToOne
+    @Getter
+    private Client client;
+    @OneToOne
+    @Getter
+    private Driver driver;
 
     public Freight(long id, Client client, Driver driver, Location origin, Location destination,
                    long startDate, long endDate, double distance, int weight,
-                   FreightServiceEnum service,
+                   FreightServiceEnum service, FreightStatusEnum status,
                    String description) {
         this.id = id;
         this.client = client;
@@ -62,7 +74,6 @@ public class Freight {
         this.description = description;
         setEndDate(endDate);
         setStartDate(startDate);
-        this.status = state.getName();
     }
 
     public void calculatePrice() {
@@ -74,30 +85,32 @@ public class Freight {
     }
 
     public Freight confirm() {
-        state.confirm();
-        return this;
-    }
-    public Freight start() {
-        state.start();
-        return this;
-    }
-    public Freight finish() {
-        state.finish();
-        return this;
-    }
-    public Freight cancel() {
-        state.cancel();
+        this.status = FreightStatusEnum.CONFIRMED;
+        calculatePrice();
         return this;
     }
 
-    public void setState(FreightState state) {
-        System.out.print(this.status.getClass().getSimpleName());
-        this.state = state;
-        this.status = state.getName();
-        System.out.print(" -> " +this.status.getClass().getSimpleName() + "\n");
-        System.out.println(this);
-        System.out.println("------------------------------------------");
+    public Freight start() {
+        if (status != FreightStatusEnum.CONFIRMED)
+            throw new RuntimeException("O frete ainda não foi confirmado");
+        this.status = FreightStatusEnum.STARTED;
+        return this;
     }
+
+    public Freight finish() {
+        if (status != FreightStatusEnum.STARTED)
+            throw new RuntimeException("O frete ainda não foi iniciado");
+        this.status = FreightStatusEnum.FINISHED;
+        return this;
+    }
+
+    public Freight cancel() {
+        if (status != FreightStatusEnum.CONFIRMED)
+            throw new RuntimeException("O frete ainda não pode ser cancelado no atual estado");
+        this.status = FreightStatusEnum.CANCELED;
+        return this;
+    }
+
 
     public void setStartDate(long startDate) {
         this.startDate = DateUtil.millisecondsToDate(startDate);
@@ -107,25 +120,4 @@ public class Freight {
         this.endDate = DateUtil.millisecondsToDate(endDate);
     }
 
-    public static void main(String[] args) {
-        Freight freight = Instantiation.freights.get(0);
-        freight.calculatePrice();
-        System.out.println(freight.price);
-
-        Freight freight2 = Instantiation.freights.get(1);
-        freight2.calculatePrice();
-        System.out.println(freight2.price);
-
-        //Ordem certa
-        System.out.println("confirm - start - finish");
-        freight.confirm().start().finish();
-
-        //Resulta em erro
-        System.out.println("start - confirm - finish");
-        freight.start().confirm().finish();
-
-        //Resulta em erro
-        System.out.println("finish - confirm - start - cancel");
-        freight.finish().confirm().start().cancel();
-    }
 }

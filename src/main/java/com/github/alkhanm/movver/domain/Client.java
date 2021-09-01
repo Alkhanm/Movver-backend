@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 @Table(name = "tb_client")
 public class Client extends User {
     public Client() {}
-    public Client(String name, String password, String phoneNumber, Long birthDate) {
+    public Client(Long id, String name, String password, String phoneNumber, Long birthDate) {
         super(name, password, phoneNumber, birthDate);
+        this.id = id;
     }
 }
