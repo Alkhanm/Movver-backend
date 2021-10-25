@@ -1,9 +1,8 @@
 package com.github.alkhanm.movver.domain;
 
-import com.github.alkhanm.movver.configurations.Instantiation;
-import com.github.alkhanm.movver.domain.design.patterns.strategies.FreightCalculator;
-import com.github.alkhanm.movver.domain.design.patterns.strategies.HomeMovingCalculator;
-import com.github.alkhanm.movver.domain.design.patterns.strategies.MaterialTransportCalculator;
+import com.github.alkhanm.movver.domain.strategies.FreightCalculator;
+import com.github.alkhanm.movver.domain.strategies.HomeMovingCalculator;
+import com.github.alkhanm.movver.domain.strategies.MaterialTransportCalculator;
 import com.github.alkhanm.movver.domain.enums.FreightServiceEnum;
 import com.github.alkhanm.movver.domain.enums.FreightStatusEnum;
 import com.github.alkhanm.movver.utils.DateUtil;
@@ -11,7 +10,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.concurrent.ExecutionException;
 
 @Entity
 @EqualsAndHashCode

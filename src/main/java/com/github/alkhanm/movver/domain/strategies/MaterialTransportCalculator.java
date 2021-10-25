@@ -1,4 +1,4 @@
-package com.github.alkhanm.movver.domain.design.patterns.strategies;
+package com.github.alkhanm.movver.domain.strategies;
 
 import com.github.alkhanm.movver.domain.Freight;
 

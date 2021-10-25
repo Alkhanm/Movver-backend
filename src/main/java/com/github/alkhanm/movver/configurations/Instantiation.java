@@ -27,7 +27,6 @@ public class Instantiation implements CommandLineRunner {
     public static Client client3 = new Client(3L, "Pedro", "senha", "(61) 91243-5312",
             Instant.parse("2001-07-10T21:20:41Z").toEpochMilli());
 
-
     public static List<Vehicle> vehicles = List.of(
             Vehicle.builder()
                     .licensePlate("Kdc5475")
