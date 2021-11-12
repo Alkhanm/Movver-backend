@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.springdoc.default-consumes-media-type",
+      "type": "java.lang.String",
+      "description": "Description for spring.springdoc.default-consumes-media-type."
+  }
+] }
