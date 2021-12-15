@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/movver-test
+    url: jdbc:postgresql://localhost:5433/movver-test?createDatabaseIfNotExist=true
     username: postgres
     password: root
   jpa:

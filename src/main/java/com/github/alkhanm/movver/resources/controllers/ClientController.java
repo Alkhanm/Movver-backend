@@ -4,6 +4,7 @@ import com.github.alkhanm.movver.domain.Client;
 import com.github.alkhanm.movver.domain.mapper.ClientMapper;
 import com.github.alkhanm.movver.domain.transference.ClientResponse;
 import com.github.alkhanm.movver.services.ClientService;
+import com.github.alkhanm.movver.services.exceptions.InvalidRequestException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,31 +23,26 @@ public class ClientController {
         this.service = service;
     }
 
+    // Retorna uma lista contendo todos os clientes do sistema
     @GetMapping
-    @Operation(summary = "Lorem ipsum")
-    @ApiResponse(responseCode = "200", description = "Lorem ipsum", content = {@Content(schema = @Schema(implementation = Object.class))})
-    @ApiResponse(responseCode = "400", description = "Lorem ipsum", content = {@Content})
     private @ResponseBody
     List<ClientResponse> findAllBy(){
         return mapper.toResponseList(service.findAllBy());
     }
 
-    @GetMapping("/search")
-    @Operation(summary = "Lorem ipsum")
-    @ApiResponse(responseCode = "200", description = "Lorem ipsum", content = {@Content(schema = @Schema(implementation = Object.class))})
-    @ApiResponse(responseCode = "400", description = "Lorem ipsum", content = {@Content})
+    // Retorna um único cliente através do seu identificador (ID/Número de telefone)
+    @GetMapping("/{phoneNumber}")
     private @ResponseBody
-    ClientResponse findByPhoneNumber(@RequestParam String phoneNumber){
+    ClientResponse findByPhoneNumber(@PathVariable String phoneNumber){
         Client client = service.findByPhoneNumber(phoneNumber);
         return mapper.toResponse(client);
     }
 
+    // Salva um cliente no banco de dados
     @PostMapping
-    @Operation(summary = "Lorem ipsum")
-    @ApiResponse(responseCode = "200", description = "Lorem ipsum", content = {@Content(schema = @Schema(implementation = Object.class))})
-    @ApiResponse(responseCode = "400", description = "Lorem ipsum", content = {@Content})
     private @ResponseBody
     ClientResponse save(@RequestBody Client request){
+        if (request == null) throw new InvalidRequestException("O corpo da requisição está vazio");
         Client client = service.save(request);
         return mapper.toResponse(client);
     }

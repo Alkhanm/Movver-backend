@@ -1,7 +1,6 @@
 package com.github.alkhanm.movver.resources.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

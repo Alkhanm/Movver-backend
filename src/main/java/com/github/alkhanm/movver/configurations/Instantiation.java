@@ -20,12 +20,15 @@ public class Instantiation implements CommandLineRunner {
     private final ClientService clientService;
     private final FreightService freightService;
 
-    public static Client client1 = new Client(1L, "Gabriela", "senha1223", "(22) 92343-1673",
-            Instant.parse("1987-02-20T21:20:41Z").toEpochMilli());
-    public static Client client2 = new Client(2L, "Joás", "senha101", "(99) 99999-9999",
-            Instant.parse("1998-11-11T11:11:11Z").toEpochMilli());
-    public static Client client3 = new Client(3L, "Pedro", "senha", "(61) 91243-5312",
-            Instant.parse("2001-07-10T21:20:41Z").toEpochMilli());
+    public static List<Client> clients = List.of(
+            new Client("Gabriela", "senha1223", "(22) 92343-1673",
+                    Instant.parse("1987-02-20T21:20:41Z").toEpochMilli()),
+            new Client("Joás", "senha101", "(99) 99999-9999",
+                    Instant.parse("1998-11-11T11:11:11Z").toEpochMilli()),
+            new Client("Pedro", "senha", "(61) 91243-5312",
+                    Instant.parse("2001-07-10T21:20:41Z").toEpochMilli())
+    );
+
 
     public static List<Vehicle> vehicles = List.of(
             Vehicle.builder()
@@ -61,7 +64,7 @@ public class Instantiation implements CommandLineRunner {
     );
     public static List<Driver> drivers = List.of(
             new Driver(
-                    "Jorge", "senha", "(51) 96231-4618",
+                    "Jorge", "senha", "(88) 88888-8888",
                     Instant.parse("1970-10-23T21:20:21Z").toEpochMilli(),
                     false,
                     new Location("Setor Garavelo", 0.2123, 0.2122),
@@ -93,7 +96,7 @@ public class Instantiation implements CommandLineRunner {
     public static List<Freight> freights = List.of(
             new Freight(
                     1L,
-                    client2,
+                    clients.get(1),
                     drivers.get(0),
                     new Location("Rua João Bobo", 1.23, 1.123),
                     new Location("Rua Dom Pedro I", 1.3, 1.52),
@@ -102,12 +105,12 @@ public class Instantiation implements CommandLineRunner {
                     30,
                     2000,
                     FreightServiceEnum.HOME_MOVING,
-                    FreightStatusEnum.FINISHED,
+                    FreightStatusEnum.CONFIRMED,
                     "").confirm().start().finish(),
             new Freight(
                     2L,
-                    client2,
-                    drivers.get(2),
+                    clients.get(1),
+                    drivers.get(0),
                     new Location("Rua João Bobo", 1.23, 1.123),
                     new Location("Rua Dom Pedro I", 1.3, 1.52),
                     Instant.parse("2021-10-07T20:20:21Z").toEpochMilli(),
@@ -119,8 +122,8 @@ public class Instantiation implements CommandLineRunner {
                     "").confirm().start().finish(),
             new Freight(
                     3L,
-                    client1,
-                    drivers.get(1),
+                    clients.get(0),
+                    drivers.get(0),
                     new Location("Avenida A-23", 1.323, 2.123),
                     new Location("Rua João Bobo", 1.323, 1.3),
                     Instant.parse("2021-10-11T11:20:21Z").toEpochMilli(),
@@ -128,11 +131,11 @@ public class Instantiation implements CommandLineRunner {
                     55.0,
                     3000,
                     FreightServiceEnum.MATERIAL_TRANSPORT,
-                    FreightStatusEnum.FINISHED,
-                    "").confirm().cancel(),
+                    FreightStatusEnum.UNCONFIRMED,
+                    "").confirm(),
             new Freight(
                     3L,
-                    client3,
+                    clients.get(2),
                     drivers.get(2),
                     new Location("Rua Javaí", 1.233, 1.323),
                     new Location("Rua Santo Agostinho", 1.323, 1.03),
@@ -141,8 +144,8 @@ public class Instantiation implements CommandLineRunner {
                     20.0,
                     4000,
                     FreightServiceEnum.MATERIAL_TRANSPORT,
-                    FreightStatusEnum.CONFIRMED,
-                    "").confirm().start().finish()
+                    FreightStatusEnum.UNCONFIRMED,
+                    "").confirm()
     );
 
     public Instantiation(DriverService driverService, ClientService clientService, FreightService freightService) {
@@ -153,9 +156,7 @@ public class Instantiation implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        clientService.save(client1);
-        clientService.save(client2);
-        clientService.save(client3);
+        clients.forEach(clientService::save);
         drivers.forEach(driverService::save);
         freights.forEach(freightService::save);
     }

@@ -21,7 +21,7 @@ public class Freight {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
-    private long id;
+    private Long id;
     @Getter
     private String description;
     @Getter
@@ -57,7 +57,7 @@ public class Freight {
     @Getter
     private Driver driver;
 
-    public Freight(long id, Client client, Driver driver, Location origin, Location destination,
+    public Freight(Long id, Client client, Driver driver, Location origin, Location destination,
                    long startDate, long endDate, double distance, int weight,
                    FreightServiceEnum service, FreightStatusEnum status,
                    String description) {

@@ -4,6 +4,7 @@ import com.github.alkhanm.movver.domain.transference.Credentials;
 import com.github.alkhanm.movver.domain.User;
 import com.github.alkhanm.movver.repositories.UserRepository;
 import com.github.alkhanm.movver.services.exceptions.InvalidCredentialsException;
+import com.github.alkhanm.movver.services.exceptions.ResourceNotFoundException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,9 +25,8 @@ public class AuthenticatorService implements UserDetailsService {
     }
 
     @Override public UserDetails loadUserByUsername(String phoneNumber)  {
-        User user = repository.findByPhoneNumber(User.removePhoneMask(phoneNumber));
-        if (user == null) throw new InvalidCredentialsException();
-        return user;
+        return repository.findByPhoneNumber(User.removePhoneMask(phoneNumber))
+                .orElseThrow(() -> new ResourceNotFoundException("Esse usuário não existe"));
     }
 
     public User authenticate(Credentials credentials){

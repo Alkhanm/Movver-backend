@@ -2,6 +2,7 @@ package com.github.alkhanm.movver.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.alkhanm.movver.utils.DateUtil;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
